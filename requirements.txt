@@ -9,8 +9,6 @@ attrs==23.1.0
 Babel==2.13.1
 beautifulsoup4==4.12.2
 bleach==6.1.0
-certifi @ file:///private/tmp/python-certifi-20231008-5561-13s00fm/certifi-2023.7.22
-cffi @ file:///private/tmp/cffi-20231014-5567-1hyue8f/cffi-1.16.0
 charset-normalizer==3.3.2
 colorlover==0.3.0
 comm==0.2.0
