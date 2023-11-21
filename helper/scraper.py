@@ -7,9 +7,7 @@ def get_zona_prop_info(url):
 
     # dr = webdriver.Chrome()
     # dr = Driver(uc=True)
-    op = webdriver.ChromeOptions()
-    op.add_argument('headless')
-    driver = webdriver.Chrome(options=op)
+    dr = webdriver.ChromeOptions(headless=True)
 
     dr.get(url)
     bs = BeautifulSoup(dr.page_source,"lxml")
