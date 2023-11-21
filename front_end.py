@@ -1,5 +1,6 @@
 import streamlit as st
 from app import *
+import os
 
 st.markdown('**Bienvenid@**')
 url = st.text_input('Link Zona Prop')
@@ -16,3 +17,4 @@ if st.button('Generar ficha'):
                 file_name=f"{file_name}.pdf",
                 mime="application/pdf"
             )
+    os.system(f"rm {file_name}.pdf")  
