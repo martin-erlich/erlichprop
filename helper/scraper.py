@@ -2,7 +2,6 @@ from bs4 import BeautifulSoup
 from selenium import webdriver
 from seleniumbase import Driver
 from selenium.webdriver.firefox.options import Options
-import requests
 
 def get_zona_prop_info(url):
 
