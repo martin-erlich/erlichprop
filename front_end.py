@@ -17,4 +17,4 @@ if st.button('Generar ficha'):
                 file_name=f"{file_name}.pdf",
                 mime="application/pdf"
             )
-    os.system(f"rm {file_name}.pdf")  
+        os.system(f"rm {file_name}.pdf")  
