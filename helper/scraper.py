@@ -2,13 +2,22 @@ from bs4 import BeautifulSoup
 from selenium import webdriver
 from seleniumbase import Driver
 from selenium.webdriver.firefox.options import Options
+import os
+import streamlit as st
+
+@st.experimental_singleton
+def installff():
+    os.system('sbase install geckodriver')
+    os.system('ln -s /home/appuser/venv/lib/python3.7/site-packages/seleniumbase/drivers/geckodriver /home/appuser/venv/bin/geckodriver')
 
 def get_zona_prop_info(url):
 
-    # dr = webdriver.Chrome()
-    # dr = Driver(uc=True)
-    dr = webdriver.ChromeOptions(headless=True)
-
+    _ = installff()
+    from selenium import webdriver
+    from selenium.webdriver import FirefoxOptions
+    opts = FirefoxOptions()
+    opts.add_argument("--headless")
+    dr = webdriver.Firefox(options=opts)
     dr.get(url)
     bs = BeautifulSoup(dr.page_source,"lxml")
 
