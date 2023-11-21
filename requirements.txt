@@ -7,6 +7,7 @@ asttokens==2.4.1
 async-lru==2.0.4
 attrs==23.1.0
 Babel==2.13.1
+reportlab
 beautifulsoup4==4.12.2
 bleach==6.1.0
 charset-normalizer==3.3.2
