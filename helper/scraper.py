@@ -6,7 +6,11 @@ from selenium.webdriver.firefox.options import Options
 def get_zona_prop_info(url):
 
     # dr = webdriver.Chrome()
-    dr = Driver(uc=True)
+    # dr = Driver(uc=True)
+    op = webdriver.ChromeOptions()
+    op.add_argument('headless')
+    driver = webdriver.Chrome(options=op)
+
     dr.get(url)
     bs = BeautifulSoup(dr.page_source,"lxml")
 
