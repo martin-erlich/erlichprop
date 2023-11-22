@@ -17,7 +17,7 @@ def get_zona_prop_info(url):
     )
     dr.get(url)
     bs = BeautifulSoup(dr.page_source,"lxml")
-
+    print(bs)
     price_text = bs.find(class_='price-value').get_text(strip=True)
     price = int(''.join(filter(str.isdigit, price_text)))
     address = bs.find('div', class_='section-location-property').get_text(strip=True)
