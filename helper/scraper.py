@@ -2,20 +2,25 @@ from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
 import os
+import undetected_chromedriver as uc
 import streamlit as st
 from selenium.webdriver.firefox.service import Service
 from webdriver_manager.firefox import GeckoDriverManager
 
 def get_zona_prop_info(url):
 
-    firefoxOptions = Options()
-    firefoxOptions.add_argument("--headless")
-    firefoxOptions.add_argument("--enable-javascript")
-    service = Service(GeckoDriverManager().install())
-    dr = webdriver.Firefox(
-        options=firefoxOptions,
-        service=service,
-    )
+    # firefoxOptions = Options()
+    # firefoxOptions.add_argument("--headless")
+    # firefoxOptions.add_argument("--enable-javascript")
+    # service = Service(GeckoDriverManager().install())
+    # dr = webdriver.Firefox(
+    #     options=firefoxOptions,
+    #     service=service,
+    # )
+    options = uc.ChromeOptions() 
+    options.headless = False  # Set headless to False to run in non-headless mode
+
+    dr = uc.Chrome(use_subprocess=True, options=options) 
     dr.get(url)
     bs = BeautifulSoup(dr.page_source,"lxml")
     print(bs)
