@@ -10,6 +10,7 @@ def get_zona_prop_info(url):
 
     firefoxOptions = Options()
     firefoxOptions.add_argument("--headless")
+    firefoxOptions.add_argument("--enable-javascript")
     service = Service(GeckoDriverManager().install())
     dr = webdriver.Firefox(
         options=firefoxOptions,
