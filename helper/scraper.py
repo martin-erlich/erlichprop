@@ -1,11 +1,5 @@
 from bs4 import BeautifulSoup
-from selenium import webdriver
-from selenium.webdriver.firefox.options import Options
-import os
 import undetected_chromedriver as uc
-import streamlit as st
-from selenium.webdriver.firefox.service import Service
-from webdriver_manager.firefox import GeckoDriverManager
 
 def get_zona_prop_info(url):
 
@@ -20,7 +14,8 @@ def get_zona_prop_info(url):
     options = uc.ChromeOptions() 
     options.add_argument('--headless')
 
-    dr = uc.Chrome(use_subprocess=True, options=options) 
+    # dr = uc.Chrome(use_subprocess=True, options=options) 
+    dr = uc.Chrome(options=options) 
     dr.get(url)
     bs = BeautifulSoup(dr.page_source,"lxml")
     print(bs)
