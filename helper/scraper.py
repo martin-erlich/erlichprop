@@ -1,5 +1,6 @@
 from bs4 import BeautifulSoup
 import undetected_chromedriver as uc
+import os
 
 from seleniumbase import Driver
 from seleniumbase import page_actions
@@ -23,7 +24,15 @@ def get_zona_prop_info(url):
     #     options=firefoxOptions,
     #     service=service,
     # )
-    dr = Driver(uc=True)
+    option = webdriver.ChromeOptions()
+
+    # You will need to specify the binary location for Heroku 
+    option.binary_location = os.getenv('GOOGLE_CHROME_BIN')
+
+    option.add_argument("--headless")
+    option.add_argument('--disable-gpu')
+    option.add_argument('--no-sandbox')
+    dr = webdriver.Chrome(executable_path=os.getenv('CHROME_EXECUTABLE_PATH'), options=option)
     dr.get(url)
     bs = BeautifulSoup(dr.page_source,"lxml")
     print(bs)
