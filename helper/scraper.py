@@ -5,12 +5,13 @@ import os
 from seleniumbase import Driver
 from seleniumbase import page_actions
 from selenium import webdriver
-import selenium.webdriver.chrome.service as service
 
 
 def get_zona_prop_info(url):
+    from selenium import webdriver
+    import selenium.webdriver.chrome.service as service
 
-    service = service.Service('/path/to/chromedriver')
+    service = service.Service(os.getenv('CHROME_EXECUTABLE_PATH'))
     service.start()
     capabilities = {'chrome.binary': os.getenv('CHROME_EXECUTABLE_PATH')}
     dr = webdriver.Remote(service.service_url, capabilities)
@@ -41,7 +42,7 @@ def get_zona_prop_info(url):
     # option.add_argument("--no-sandbox")
     # option.add_argument("--window-size=1920x1080")
     # dr = webdriver.Chrome(options=option)
-    # dr = uc.Chrome(headless=True,use_subprocess=False)
+    dr = uc.Chrome(headless=True,use_subprocess=False)
     dr.get(url)
     bs = BeautifulSoup(dr.page_source,"lxml")
     print(bs)
