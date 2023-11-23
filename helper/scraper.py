@@ -7,21 +7,13 @@ from seleniumbase import page_actions
 
 def get_zona_prop_info(url):
 
-    # firefoxOptions = Options()
-    # firefoxOptions.add_argument("--headless")
-    # firefoxOptions.add_argument("--enable-javascript")
-    # service = Service(GeckoDriverManager().install())
-    # dr = webdriver.Firefox(
-    #     options=firefoxOptions,
-    #     service=service,
-    # )
-    # options = uc.ChromeOptions() 
-    # options.add_argument('--headless')
-
-    # dr = uc.Chrome(use_subprocess=True, options=options) 
-    # dr = uc.Chrome(options=options) 
-    dr = Driver(uc=True)
-    dr.get(url)
+    from selenium.webdriver.chrome.options import Options
+    ########################################################
+    options = Options()
+    options.add_argument('--headless')
+    options.add_argument('--disable-gpu')
+    options.add_argument('--log-level=3')
+    dr = webdriver.Chrome(options=options)
     bs = BeautifulSoup(dr.page_source,"lxml")
     print(bs)
     price_text = bs.find(class_='price-value').get_text(strip=True)
