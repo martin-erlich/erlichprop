@@ -1,12 +1,15 @@
 from helper.pdf import *
 from helper.scraper import *
-import os
-from dotenv import load_dotenv, find_dotenv
-load_dotenv(find_dotenv())
+from flask import Flask, request, redirect, jsonify
 
-api_key = os.environ.get("API_KEY")
+app = Flask(__name__)
 
-def create_file(url,file_name):
-    information = get_zona_prop_info(url)
-    create_real_estate_pdf(file_name,information)
 
+@app.route('/zona_prop', methods=['GET'])
+def get_zona_prop():
+    body = request.get_json()
+    url = body['url']
+    return jsonify(get_zona_prop_info(url))
+if __name__ == "__main__":
+    # app.run(host='0.0.0.0')
+    app.run(host='0.0.0.0',debug=True,port=3000)

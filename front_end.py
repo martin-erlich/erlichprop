@@ -8,7 +8,8 @@ file_name = st.text_input('Nombre para la ficha')
 
 if st.button('Generar ficha'):
     with st.status('Creando ficha...'):
-        create_file(url,file_name)
+        information = None
+        create_real_estate_pdf(file_name,information)
 
     with open(f"{file_name}.pdf", "rb") as file:
         btn = st.download_button(
