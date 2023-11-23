@@ -1,6 +1,10 @@
 from bs4 import BeautifulSoup
 import undetected_chromedriver as uc
 
+from seleniumbase import Driver
+from seleniumbase import page_actions
+
+
 def get_zona_prop_info(url):
 
     # firefoxOptions = Options()
@@ -11,11 +15,12 @@ def get_zona_prop_info(url):
     #     options=firefoxOptions,
     #     service=service,
     # )
-    options = uc.ChromeOptions() 
-    options.add_argument('--headless')
+    # options = uc.ChromeOptions() 
+    # options.add_argument('--headless')
 
     # dr = uc.Chrome(use_subprocess=True, options=options) 
-    dr = uc.Chrome(options=options) 
+    # dr = uc.Chrome(options=options) 
+    dr = Driver(uc=True)
     dr.get(url)
     bs = BeautifulSoup(dr.page_source,"lxml")
     print(bs)
