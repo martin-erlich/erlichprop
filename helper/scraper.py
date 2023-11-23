@@ -16,9 +16,6 @@ def get_zona_prop_info(url):
     from selenium.webdriver.support.ui import WebDriverWait
     from webdriver_manager.firefox import GeckoDriverManager
 
-
-    st.title("Test Selenium")
-
     firefoxOptions = Options()
     firefoxOptions.add_argument("--headless")
     service = Service(GeckoDriverManager().install())
