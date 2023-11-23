@@ -13,8 +13,7 @@ def get_zona_prop_info(url):
 
     service = service.Service(os.getenv('CHROME_EXECUTABLE_PATH'))
     service.start()
-    capabilities = {'chrome.binary': os.getenv('CHROME_EXECUTABLE_PATH')}
-    dr = webdriver.Remote(service.service_url, capabilities)
+    dr = webdriver.Remote(service.service_url)
     # from selenium import webdriver
     # from selenium.common.exceptions import TimeoutException
     # from selenium.webdriver.common.by import By
