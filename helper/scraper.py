@@ -32,7 +32,7 @@ def get_zona_prop_info(url):
     option.add_argument("--headless")
     option.add_argument('--disable-gpu')
     option.add_argument('--no-sandbox')
-    dr = webdriver.Chrome(executable_path=os.getenv('CHROME_EXECUTABLE_PATH'), options=option)
+    dr = webdriver.Chrome( options=option)
     dr.get(url)
     bs = BeautifulSoup(dr.page_source,"lxml")
     print(bs)
