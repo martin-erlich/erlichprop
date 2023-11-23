@@ -24,17 +24,18 @@ def get_zona_prop_info(url):
     #     options=firefoxOptions,
     #     service=service,
     # )
-    option = webdriver.ChromeOptions()
+    # option = webdriver.ChromeOptions()
 
     # You will need to specify the binary location for Heroku 
-    option.binary_location = os.getenv('GOOGLE_CHROME_BIN')
+    # option.binary_location = os.getenv('GOOGLE_CHROME_BIN')
 
-    option.add_argument("--headless")
-    option.add_argument("--disable-gpu")
-    option.add_argument("--enable-javascript")
-    option.add_argument("--no-sandbox")
-    option.add_argument("--window-size=1920x1080")
-    dr = webdriver.Chrome(options=option)
+    # option.add_argument("--headless")
+    # option.add_argument("--disable-gpu")
+    # option.add_argument("--enable-javascript")
+    # option.add_argument("--no-sandbox")
+    # option.add_argument("--window-size=1920x1080")
+    # dr = webdriver.Chrome(options=option)
+    dr = uc.Chrome(headless=True,use_subprocess=False)
     dr.get(url)
     bs = BeautifulSoup(dr.page_source,"lxml")
     print(bs)
