@@ -3,19 +3,19 @@ import undetected_chromedriver as uc
 
 from seleniumbase import Driver
 from seleniumbase import page_actions
+from selenium import webdriver
 
 
 def get_zona_prop_info(url):
 
-    from selenium.webdriver.chrome.options import Options
-    ########################################################
-    options = Options()
-    options.add_argument('--headless')
-    options.add_argument('--disable-gpu')
-    options.add_argument('--log-level=3')
-    dr = webdriver.Chrome(options=options)
+    from selenium import webdriver
+    from selenium.webdriver import FirefoxOptions
+    opts = FirefoxOptions()
+    opts.add_argument("--headless")
+    dr = webdriver.Firefox(options=opts)
+    dr.get(url)
     bs = BeautifulSoup(dr.page_source,"lxml")
-    print(bs)
+    # print(bs)
     price_text = bs.find(class_='price-value').get_text(strip=True)
     price = int(''.join(filter(str.isdigit, price_text)))
     address = bs.find('div', class_='section-location-property').get_text(strip=True)
