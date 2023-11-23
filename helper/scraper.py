@@ -18,7 +18,7 @@ def get_zona_prop_info(url):
     #     service=service,
     # )
     options = uc.ChromeOptions() 
-    options.headless = False  # Set headless to False to run in non-headless mode
+    options.add_argument('--headless')
 
     dr = uc.Chrome(use_subprocess=True, options=options) 
     dr.get(url)
