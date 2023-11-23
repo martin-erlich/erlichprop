@@ -7,12 +7,25 @@ from selenium import webdriver
 
 
 def get_zona_prop_info(url):
-
     from selenium import webdriver
-    from selenium.webdriver import FirefoxOptions
-    opts = FirefoxOptions()
-    opts.add_argument("--headless")
-    dr = webdriver.Firefox(options=opts)
+    from selenium.common.exceptions import TimeoutException
+    from selenium.webdriver.common.by import By
+    from selenium.webdriver.firefox.options import Options
+    from selenium.webdriver.firefox.service import Service
+    from selenium.webdriver.support import expected_conditions as EC
+    from selenium.webdriver.support.ui import WebDriverWait
+    from webdriver_manager.firefox import GeckoDriverManager
+
+
+    st.title("Test Selenium")
+
+    firefoxOptions = Options()
+    firefoxOptions.add_argument("--headless")
+    service = Service(GeckoDriverManager().install())
+    dr = webdriver.Firefox(
+        options=firefoxOptions,
+        service=service,
+    )
     dr.get(url)
     bs = BeautifulSoup(dr.page_source,"lxml")
     print(bs)
