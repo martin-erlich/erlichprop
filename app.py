@@ -13,3 +13,5 @@ def get_zona_prop():
 if __name__ == "__main__":
     app.run(host='0.0.0.0')
     # app.run(host='0.0.0.0',debug=True,port=3000)
+
+    # https://erlich-prop-scrapper-9e17f7c92865.herokuapp.com

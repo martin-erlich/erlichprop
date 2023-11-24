@@ -11,15 +11,31 @@ from selenium.webdriver.chrome.service import Service
 
 def get_zona_prop_info(url):
 
-    chrome_options = Options()
-    chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
-    chrome_options.add_argument("--headless")
-    chrome_options.add_argument("--disable-gpu")
-    chrome_options.add_argument("--no-sandbox")
-    chrome_options.add_argument("--window-size=1920x1080")
-    dr = webdriver.Chrome(service=Service(executable_path=os.environ.get("CHROMEDRIVER_PATH")), options=chrome_options)
+    from selenium import webdriver
+    from selenium.webdriver.chrome.service import Service
+    from webdriver_manager.chrome import ChromeDriverManager
+    from selenium.webdriver.common.by import By
+    from selenium_stealth import stealth
+
+    options = webdriver.ChromeOptions()
+    options.add_argument("start-maximized")
+    options.add_argument("--headless")
+    options.add_experimental_option("excludeSwitches", ["enable-automation"])
+    options.add_experimental_option('useAutomationExtension', False)
+
+    s=Service(ChromeDriverManager().install())
+    dr = webdriver.Chrome(service=s, options=options)
+
+    stealth(dr,
+            languages=["en-US", "en"],
+            vendor="Google Inc.",
+            platform="Win32",
+            webgl_vendor="Intel Inc.",
+            renderer="Intel Iris OpenGL Engine",
+            fix_hairline=True,
+    )
     dr.get(url)
-    bs = BeautifulSoup(dr.page_source,"html")
+    bs = BeautifulSoup(dr.page_source,"lxml")
     print(bs)
     price_text = bs.find(class_='price-value').get_text(strip=True)
     price = int(''.join(filter(str.isdigit, price_text)))
