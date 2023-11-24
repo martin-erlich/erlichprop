@@ -6,44 +6,19 @@ from seleniumbase import Driver
 from seleniumbase import page_actions
 from selenium import webdriver
 
+from selenium.webdriver.chrome.service import Service as ChromeService
+
 
 def get_zona_prop_info(url):
-    from selenium import webdriver
-    import selenium.webdriver.chrome.service as service
 
-    # service = service.Service(os.getenv('CHROME_EXECUTABLE_PATH'))
-    # service.start()
-    # dr = webdriver.Remote(service.service_url)
-    # from selenium import webdriver
-    # from selenium.common.exceptions import TimeoutException
-    # from selenium.webdriver.common.by import By
-    # from selenium.webdriver.firefox.options import Options
-    # from selenium.webdriver.firefox.service import Service
-    # from selenium.webdriver.support import expected_conditions as EC
-    # from selenium.webdriver.support.ui import WebDriverWait
-    # from webdriver_manager.firefox import GeckoDriverManager
-
-    # firefoxOptions = Options()
-    # firefoxOptions.add_argument("--headless")
-    # service = Service(GeckoDriverManager().install())
-    # dr = webdriver.Firefox(
-    #     options=firefoxOptions,
-    #     service=service,
-    # )
-    # option = webdriver.ChromeOptions()
-
-    # You will need to specify the binary location for Heroku 
-    # option.binary_location = os.getenv('GOOGLE_CHROME_BIN')
-
-    # option.add_argument("--headless")
-    # option.add_argument("--disable-gpu")
-    # option.add_argument("--enable-javascript")
-    # option.add_argument("--no-sandbox")
-    # option.add_argument("--window-size=1920x1080")
-    # dr = webdriver.Chrome(options=option)
-    dr = uc.Chrome(headless=True,use_subprocess=False)
+    chrome_options = webdriver.ChromeOptions()
+    chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+    chrome_options.add_argument("--headless")
+    chrome_options.add_argument("--disable-dev-shm-usage")
+    chrome_options.add_argument("--no-sandbox")
+    dr = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
     dr.get(url)
-    bs = BeautifulSoup(dr.page_source,"lxml")
+    bs = BeautifulSoup(dr.page_source,"html")
     print(bs)
     price_text = bs.find(class_='price-value').get_text(strip=True)
     price = int(''.join(filter(str.isdigit, price_text)))
