@@ -6,7 +6,7 @@ from seleniumbase import Driver
 from seleniumbase import page_actions
 from selenium import webdriver
 
-from selenium.webdriver.chrome.service import Service as ChromeService
+from selenium.webdriver.chrome.service import Service
 
 
 def get_zona_prop_info(url):
@@ -16,7 +16,7 @@ def get_zona_prop_info(url):
     chrome_options.add_argument("--headless")
     chrome_options.add_argument("--disable-dev-shm-usage")
     chrome_options.add_argument("--no-sandbox")
-    dr = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
+    dr = webdriver.Chrome(service=Service(executable_path=os.environ.get("CHROMEDRIVER_PATH")), options=chrome_options)
     dr.get(url)
     bs = BeautifulSoup(dr.page_source,"html")
     print(bs)
