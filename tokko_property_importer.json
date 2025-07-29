@@ -1,0 +1,59 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Tokko Property Importer",
+    "version": "1.0.0",
+    "description": "Envía una URL de archivo XML para importar propiedades en Tokko Broker"
+  },
+  "paths": {
+    "/property_importer/": {
+      "post": {
+        "operationId": "importProperties",
+        "summary": "Importar propiedades desde XML",
+        "description": "Envía un archivo XML (vía URL) para importar propiedades y define un webhook para el callback",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "url": {
+                    "type": "string",
+                    "description": "URL del archivo XML a importar",
+                    "example": "https://url_client_file_example.xml"
+                  },
+                  "callback_url": {
+                    "type": "string",
+                    "description": "URL del webhook donde recibir notificaciones cuando el proceso termine",
+                    "example": "https://client-example-webhook"
+                  }
+                },
+                "required": ["url", "callback_url"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Solicitud aceptada para procesamiento"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "Token"
+      }
+    }
+  }
+}
